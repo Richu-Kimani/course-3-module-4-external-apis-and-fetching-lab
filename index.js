@@ -1,22 +1,22 @@
-// index.js
-const weatherApi = "https://api.weather.gov/alerts/active?area="
-
-// Your code here!
-
 async function fetchWeatherAlerts(state) {
   try {
     const url = `https://api.weather.gov/alerts/active?area=${state}`;
 
+    //Get the response after fetching
     const response = await fetch(url);
+
+    //Extract the data from the response
     const data = await response.json();
 
     console.log(data); // for testing
 
     return data;
+
   } catch (error) {
     console.log(error.message);
     throw error;
   }
+
 }
 
 function displayAlerts(data) {
@@ -49,6 +49,7 @@ function showError(message) {
 }
 
 document.querySelector('#fetch-alerts').addEventListener('click', async () => {
+
   const input = document.querySelector('#state-input');
   const state = input.value.trim();
 
@@ -57,6 +58,7 @@ document.querySelector('#fetch-alerts').addEventListener('click', async () => {
   errorDiv.classList.add('hidden');
 
   try {
+    // Safety check => check if the input has no value
     if (!state) {
       throw new Error('Please enter a state abbreviation');
     }
